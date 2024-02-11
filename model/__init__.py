@@ -1,0 +1,1 @@
+from model.localvit import LocalVisionTransformer
