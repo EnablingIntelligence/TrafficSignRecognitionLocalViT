@@ -19,3 +19,4 @@ max-line-length=120
 max-args=10
 min-public-methods=1
 max-locals=20
+max-attributes=10
