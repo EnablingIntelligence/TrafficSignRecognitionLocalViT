@@ -14,7 +14,8 @@ class NTB(nn.Module):
     """
 
     def __init__(self, in_features: int, out_features: int, sr_ratio: int = 1, dropout_path: float = .0,
-                 shrink_ratio: float = 0.75, mlp_expansion_ratio: int = 2, local: bool = False):
+                 shrink_ratio: float = 0.75, mlp_expansion_ratio: int = 2, local: bool = False,
+                 local_expansion_ratio: int = 6):
         super().__init__()
         emhsa_features = int(out_features * shrink_ratio)
         mhca_features = out_features - emhsa_features
@@ -25,7 +26,7 @@ class NTB(nn.Module):
         self.emhsa = EMHSA(emhsa_features, sr_ratio)
         self.mhca = MHCA(mhca_features)
         self.mlp = MLP(out_features, out_features, mlp_expansion_ratio) \
-            if local else LocalityModule(out_features, out_features, mlp_expansion_ratio)
+            if local else LocalityModule(out_features, out_features, local_expansion_ratio)
 
     def forward(self, x: torch.Tensor) -> torch.Tensor:
         emhsa_in = self.conv1(x)

@@ -7,7 +7,7 @@ class LocalityModule(nn.Module):
     https://arxiv.org/abs/2311.06651
     """
 
-    def __init__(self, in_features: int, out_features: int, expansion_ratio: int = 1, stride: int = 1):
+    def __init__(self, in_features: int, out_features: int, expansion_ratio: int = 6, stride: int = 1):
         super().__init__()
         hidden_features = int(in_features * expansion_ratio)
         self.locality = nn.Sequential(
